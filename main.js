@@ -1,11 +1,11 @@
 function Start(){
     navigator.mediaDevices.getUserMedia({audio:true});
-    classifier = m15.soundClassification('https://teachablemachine.withgoogle.com/models/YrdrSRUZd/model.json',modelReady);
+    classifier = ml5.soundClassifier('https://teachablemachine.withgoogle.com/models/YrdrSRUZd/model.json',modelReady);
 }
 function modelReady(){
     classifier.classify(gotResults);
 }
-function gotResults(){
+function gotResults(error,results){
     if(error){
         console.error(error);
     }else{
@@ -19,11 +19,11 @@ function gotResults(){
         document.getElementById("label_result").style.color ="rgb("+random_number_r +","+random_number_g +","+random_number_b+")";
         document.getElementById("label_confidence").style.color ="rgb("+random_number_r +","+random_number_g +","+random_number_b+")";
         img = document.getElementById("a1");
-        if(results[0].label =="barking"){
+        if(results[0].label =="Barking"){
             a1.src ="dog gifer.gif";
-        }else if(results[0].label =="meowing"){
+        }else if(results[0].label =="Meowing"){
             a1.src ="cat.gif";
-        }else if(results[0].label =="roaring"){
+        }else if(results[0].label =="Roaring"){
            a1.src ="lion-roar.gif";
         }
 }}
